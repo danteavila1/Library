@@ -26,9 +26,25 @@ function render (){
     for(let i=0; i<myLibrary.length; i++){
         let book = myLibrary[i];
         let bookEl = document.createElement("div");
-        bookEl.innerHTML = `<p>${book.title}</p>`;
+        bookEl.setAttribute("class", "bookCard");
+        bookEl.innerHTML = `
+            <div class="cardHeader">
+                <h3 class="title">${book.title}</h3>
+                <h5 class="author">by ${book.author}</h5>
+            </div>
+            <div class="cardBody">
+                <p>${book.pages} pages</p>
+                <p class="readStatus">${book.read ? "Read" : "Not Read Yet"}</p>
+                <button class="removeBtn" onclick="removeBook(${i})">Remove</buttom>
+                </div>
+        `;
         library.appendChild(bookEl);
     }
+}
+
+function removeBook (i){
+    myLibrary.splice(i, 1)
+    render();
 }
 
 
